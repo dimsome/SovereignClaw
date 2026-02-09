@@ -123,7 +123,7 @@ Done: USDC in your wallet, ready to use
 ## Installation
 
 ```bash
-clawhub install sovereignclaw
+npm i -g sovereignclaw
 ```
 
 Or add to your OpenClaw workspace:
