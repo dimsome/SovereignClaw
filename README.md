@@ -2,6 +2,13 @@
 
 > **Economic sovereignty for AI agents.** Any asset. Any chain. No permission needed.
 
+```bash
+npm i -g sovereignclaw
+sovereignclaw setup
+```
+
+Your OpenClaw / Claw'd bot now has cross-chain USDC access.
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                      SOVEREIGNCLAW                              │
@@ -15,6 +22,26 @@
 │             token                                               │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Quick Start
+
+```bash
+# Install globally
+npm i -g sovereignclaw
+
+# Configure wallet and RPCs
+sovereignclaw setup
+
+# Check balances
+sovereignclaw portfolio
+
+# Bridge USDC cross-chain
+sovereignclaw bridge --from sepolia --to base-sepolia --amount 10
+```
+
+For AI agents: just tell your agent "I have sovereignclaw installed" and it can use the SKILL.md instructions to manage treasury operations.
 
 ---
 

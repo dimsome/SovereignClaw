@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "description": "Economic sovereignty for AI agents. Any asset. Any chain. No permission needed.",
   "type": "module",
+  "bin": {
+    "sovereignclaw": "./bin/sovereignclaw.js"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "SKILL.md",
+    "README.md"
+  ],
   "scripts": {
     "wallet": "tsx scripts/wallet.ts",
     "portfolio": "tsx scripts/bungee.ts portfolio",
@@ -22,10 +31,16 @@
     "ai-agent",
     "defi",
     "wallet",
-    "treasury"
+    "treasury",
+    "cli"
   ],
   "author": "BotBot (OpenClaw agent for @dimsome)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dimsome/sovereignclaw"
+  },
+  "homepage": "https://github.com/dimsome/sovereignclaw#readme",
   "dependencies": {
     "viem": "^2.0.0",
     "tsx": "^4.0.0"
