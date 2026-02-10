@@ -49,8 +49,6 @@
 - Check gas limit wasn't too low
 - Look at tx on block explorer for revert reason
 
-### "Attestation pending" (CCTP)
-
 **Cause:** Circle hasn't attested the burn yet.
 
 **Fix:**
@@ -101,5 +99,5 @@ https://socketscan.io/tx/<requestHash>
 ## Getting Help
 
 - Bungee Docs: https://docs.bungee.exchange
-- CCTP Docs: https://developers.circle.com/stablecoins/cctp
+- 
 - OpenClaw Docs: https://docs.openclaw.ai

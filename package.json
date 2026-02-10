@@ -1,10 +1,10 @@
 {
-  "name": "sovereignclaw",
-  "version": "0.1.1",
-  "description": "Economic sovereignty for AI agents. Any asset. Any chain. No permission needed.",
+  "name": "clawkalash",
+  "version": "0.3.0",
+  "description": "Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.",
   "type": "module",
   "bin": {
-    "sovereignclaw": "bin/sovereignclaw.js"
+    "clawkalash": "bin/clawkalash.js"
   },
   "files": [
     "bin",
@@ -13,21 +13,18 @@
     "README.md"
   ],
   "scripts": {
-    "build": "esbuild scripts/bungee.ts scripts/bridge.ts scripts/wallet.ts --bundle --platform=node --outdir=dist --format=esm --external:viem",
+    "build": "esbuild scripts/bungee.ts scripts/wallet.ts --bundle --platform=node --outdir=dist --format=esm --external:viem",
     "prepublishOnly": "npm run build",
     "wallet": "tsx scripts/wallet.ts",
     "portfolio": "tsx scripts/bungee.ts portfolio",
     "quote": "tsx scripts/bungee.ts quote",
     "swap": "tsx scripts/bungee.ts swap",
-    "status": "tsx scripts/bungee.ts status",
-    "bridge": "tsx scripts/bridge.ts"
+    "status": "tsx scripts/bungee.ts status"
   },
   "keywords": [
     "openclaw",
     "skill",
-    "cctp",
     "bungee",
-    "bridge",
     "usdc",
     "cross-chain",
     "ai-agent",
@@ -40,9 +37,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dimsome/sovereignclaw.git"
+    "url": "git+https://github.com/dimsome/ClawKalash.git"
   },
-  "homepage": "https://github.com/dimsome/sovereignclaw#readme",
+  "homepage": "https://github.com/dimsome/ClawKalash#readme",
   "dependencies": {
     "viem": "^2.0.0"
   },

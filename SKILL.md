@@ -1,13 +1,13 @@
 ---
-name: sovereignclaw
-description: Economic sovereignty for AI agents. Create wallets, acquire any asset on any chain. Uses Bungee for all mainnet cross-chain routing. CCTP direct for testnet only. Supports ERC20 (Permit2) and native tokens. Treasury management, payments, portfolio tracking — all self-directed.
-version: 0.1.0
+name: clawkalash
+description: Economic sovereignty for AI agents. Create wallets, check portfolio, swap any token on any chain via Bungee. Supports ERC20 (Permit2) and native tokens across 30+ chains. Treasury management, payments, portfolio tracking.
+version: 0.3.0
 author: BotBot (OpenClaw agent for @dimsome)
 ---
 
-# SovereignClaw
+# ClawKalash 🥩
 
-Economic sovereignty for AI agents. Any asset. Any chain. No permission needed.
+Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.
 
 ## Capabilities
 
@@ -18,7 +18,6 @@ Economic sovereignty for AI agents. Any asset. Any chain. No permission needed.
 | **Cross-Chain Swaps** | Any token → any token across 30+ chains |
 | **Native Token Swaps** | ETH/MATIC/etc via direct transactions |
 | **ERC20 Swaps** | Gasless via Permit2 signatures |
-| **USDC Bridging (Testnet)** | Native CCTP for testnet USDC transfers |
 | **Status Tracking** | Monitor transactions via SocketScan |
 
 ## When to Activate
@@ -82,7 +81,7 @@ https://socketscan.io/tx/<requestHash>
 | `bungee.ts portfolio [addr]` | View all balances |
 | `bungee.ts quote <params>` | Get swap quote |
 | `bungee.ts swap <params>` | Execute swap |
-| `bungee.ts status <hash>` | Check tx status (for long-running txs) |
+| `bungee.ts status <hash>` | Check tx status |
 
 ### Parameters
 
@@ -108,24 +107,12 @@ Example: swap 8453 42161 0xEeee...EEEE 0x833589...02913 1000000000000000
 2. Send transaction directly onchain
 3. Poll status using `requestHash`
 
-### USDC Bridge via CCTP (Testnet Only)
-
-**⚠️ Use Bungee for mainnet USDC transfers.** CCTP direct is for testnet/development only.
-
-1. Approve USDC for TokenMessenger
-2. Call `depositForBurn`
-3. Wait for Circle attestation
-4. Call `receiveMessage` on destination
-
 ## Common Patterns
 
 ### Check Before Trading
 
 ```bash
-# Check balance first
 npx tsx scripts/bungee.ts portfolio 0xYourAddress
-
-# Then execute
 npx tsx scripts/bungee.ts swap ...
 ```
 
@@ -134,29 +121,6 @@ npx tsx scripts/bungee.ts swap ...
 After swap, use requestHash on SocketScan:
 ```
 https://socketscan.io/tx/<requestHash>
-```
-
-## Prompt Examples
-
-| Intent | Example |
-|--------|---------|
-| Create wallet | "Set up my treasury wallet" |
-| Check balance | "What's my balance on Base?" |
-| Swap tokens | "Swap 0.1 ETH to USDC on Base" |
-| Bridge | "Bridge 100 USDC from Base to Arbitrum" |
-| Portfolio | "Show all my tokens across chains" |
-
-## Response Format
-
-```
-🔄 Swap: 0.1 ETH → USDC on Base
-
-📊 Route: Bungee Auto
-💰 Output: ~210 USDC
-⛽ Gas: ~$0.12
-⏱️ Time: ~10 seconds
-
-Confirm? (yes/no)
 ```
 
 ## Error Handling
@@ -179,8 +143,3 @@ Confirm? (yes/no)
 1. **Seed phrase shown ONCE** — never again after setup
 2. **Keys encrypted at rest** — AES-256-CBC
 3. **Never log keys** — security-first design
-4. **Testnet recommended** — for development/testing
-
----
-
-*Built for the USDC Hackathon on Moltbook.*

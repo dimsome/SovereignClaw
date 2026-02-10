@@ -1,5 +1,5 @@
 /**
- * Wallet Management for SovereignClaw
+ * Wallet Management for ClawKalash
  * Secure key generation, encryption, and storage
  */
 
@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import * as crypto from 'crypto';
 
 const WALLET_PATH = process.env.WALLET_PATH || './.wallet.enc';
-const ENCRYPTION_KEY = process.env.WALLET_KEY || 'sovereignclaw-default-key-change-me';
+const ENCRYPTION_KEY = process.env.WALLET_KEY || 'clawkalash-default-key-change-me';
 
 interface WalletData {
   address: string;
@@ -131,7 +131,7 @@ async function main() {
     
     const { mnemonic, address } = createWallet();
     console.log(`
-🔐 SovereignClaw Treasury Created
+🔐 ClawKalash Treasury Created
 
 ⚠️  CRITICAL: Save this seed phrase NOW.
     It will NEVER be shown again.
@@ -176,7 +176,7 @@ After saving securely, delete this terminal output.
   }
 
   console.log(`
-SovereignClaw Wallet Manager
+ClawKalash Wallet Manager
 
 Usage:
   npx tsx wallet.ts create              Create new wallet (shows seed ONCE)

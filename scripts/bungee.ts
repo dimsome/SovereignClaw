@@ -379,7 +379,7 @@ async function main() {
     
     const { mnemonic, address } = createWallet();
     console.log(`
-🔐 SovereignClaw Treasury Created
+🔐 ClawKalash Treasury Created
 
 ⚠️  CRITICAL: Save this seed phrase NOW.
     It will NEVER be shown again.
@@ -529,7 +529,7 @@ After you've saved the seed phrase securely, you can use:
   }
 
   console.log(`
-SovereignClaw — Economic Sovereignty for AI Agents
+ClawKalash — Economic Sovereignty for AI Agents
 
 Wallet:
   wallet-create              Create new wallet (shows seed phrase ONCE)

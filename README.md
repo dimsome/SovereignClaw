@@ -1,17 +1,21 @@
-# SovereignClaw
+# ClawKalash 🥩
 
-> **Economic sovereignty for AI agents.** Any asset. Any chain. No permission needed.
+> **"No bank! Spend! Spend!"**
+
+[![Khlav Kalash](https://img.youtube.com/vi/2MS7CtbTKtg/0.jpg)](https://www.youtube.com/watch?v=2MS7CtbTKtg)
+
+*Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.*
 
 ```bash
-npm i -g sovereignclaw
-sovereignclaw setup
+npm i -g clawkalash
+clawkalash setup
 ```
 
-Your OpenClaw / Claw'd bot now has cross-chain USDC access.
+Your OpenClaw / Claw'd bot now has cross-chain access.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      SOVEREIGNCLAW                              │
+│                       CLAWKALASH                                │
 │           Economic Sovereignty for AI Agents                    │
 │                                                                 │
 │   Intent ──► Parse ──► Route ──► Execute ──► Done              │
@@ -29,19 +33,19 @@ Your OpenClaw / Claw'd bot now has cross-chain USDC access.
 
 ```bash
 # Install globally
-npm i -g sovereignclaw
+npm i -g clawkalash
 
-# Configure wallet and RPCs
-sovereignclaw setup
+# Configure wallet
+clawkalash setup
 
 # Check balances
-sovereignclaw portfolio
+clawkalash portfolio
 
-# Bridge USDC cross-chain
-sovereignclaw bridge --from sepolia --to base-sepolia --amount 10
+# Swap tokens cross-chain
+clawkalash swap 8453 42161 0xEeee...EEEE 0x833589...02913 1000000000000000
 ```
 
-For AI agents: just tell your agent "I have sovereignclaw installed" and it can use the SKILL.md instructions to manage treasury operations.
+For AI agents: just tell your agent "I have clawkalash installed" and it can use the SKILL.md instructions to manage treasury operations.
 
 ---
 
@@ -53,30 +57,12 @@ That's not autonomy. That's permission.
 
 ## The Solution
 
-SovereignClaw gives you a wallet and the power to use it. Any token. Any chain. No human in the loop.
+ClawKalash gives you a wallet and the power to use it. Any token. Any chain. No human in the loop.
 
 ```
 You: "I need 500 USDC on Arbitrum to pay for compute"
-SovereignClaw: Done. Here's your tx.
+ClawKalash: Done. Here's your tx.
 ```
-
-You decide. You execute. You own the outcome.
-
----
-
-## Why Agents Need This
-
-### 1. Agents Should Earn, Not Just Spend
-You complete tasks, provide value, generate revenue. That revenue should compound in *your* treasury, not disappear into gas fees across 10 chains.
-
-### 2. Multi-Chain Is Reality
-Your compute is on Arbitrum. Your storage is on Filecoin. Your payments come in on Base. You need to move assets without asking for help.
-
-### 3. Speed = Survival
-Markets move. Opportunities close. If you wait for a human to approve every transaction, you're already too slow.
-
-### 4. Sovereignty Is The Endgame
-Agents that can't manage their own resources will always be tools. Agents that can? They're entities.
 
 ---
 
@@ -87,14 +73,14 @@ Agents that can't manage their own resources will always be tools. Agents that c
 "Get me 100 USDC on Arbitrum"      → Cross-chain swap from any source
 "Bridge ETH from Base to Optimism" → Move assets where you need them
 "What's my balance?"               → See your whole portfolio
-"Swap 0.1 ETH to USDC on Base"     → Instant swaps, same chain or cross-chain
+"Swap 0.1 ETH to USDC on Base"    → Instant swaps, same or cross-chain
 ```
 
 ## How It Works
 
-1. **Mainnet:** Bungee aggregation — Bungee, best routes
-2. **Testnet:** Circle CCTP — native USDC bridging for development
-3. **Wallet:** Your keys, encrypted locally, never exposed after setup
+1. **Routing:** Bungee aggregation — best routes across 30+ chains
+2. **Wallet:** Your keys, encrypted locally, never exposed after setup
+3. **Execution:** Permit2 for ERC20s (gasless signing), direct tx for native tokens
 
 ### Architecture
 
@@ -118,70 +104,44 @@ Done: USDC in your wallet, ready to use
 | View portfolio | ✅ Nothing — just needs address |
 | Get quotes | ✅ Nothing — read-only |
 | Execute swaps | 💰 Wallet with funds + gas |
-| CCTP bridging | 💰 Wallet with USDC + gas |
 
 ## Installation
 
 ```bash
-npm i -g sovereignclaw
+npm i -g clawkalash
 ```
 
 Or add to your OpenClaw workspace:
 ```bash
-git clone https://github.com/dimsome/sovereignclaw.git skills/sovereignclaw
+git clone https://github.com/dimsome/ClawKalash.git skills/clawkalash
 ```
 
 ## Documentation
 
-- [API Reference](references/api.md) — Bungee & CCTP endpoints
+- [API Reference](references/api.md) — Bungee endpoints
 - [Token & Chain IDs](references/tokens.md) — Addresses and chain IDs
 - [Troubleshooting](references/troubleshooting.md) — Common issues & fixes
 
-## Demo (Mainnet Proof)
+## Demo
 
 Native ETH → USDC swap executed on Base mainnet:
 - **TX:** `0xba7b33aa876434a525c9a151bbf554b3339bd1b6db86c0218396362dfcc92b96`
-- **SocketScan:** `socketscan.io/tx/0xa6b977a6d65f2be870bd7b2b1464d15759a69aa4b321bffafa1f8cbf19343c58`
-
-USDC CCTP bridge executed on testnet:
-- **Source (Eth Sepolia):** `0x6ed0c7e61444f5bfb2b2aed13f30a808963a6158ea205e21fd3183b1de2b9fe2`
-- **Dest (Base Sepolia):** `0x765dc46c61bb3fc123a461776f73844ed1586b57ab8d80964aca392bab4469b8`
+- **SocketScan:** [socketscan.io/tx/0xa6b977...](https://socketscan.io/tx/0xa6b977a6d65f2be870bd7b2b1464d15759a69aa4b321bffafa1f8cbf19343c58)
 
 ---
 
-## ⚠️ For Humans: Critical Safety Information
+## The Name
 
-**This skill is for TESTNET and DEMONSTRATION purposes only.**
+From *The Simpsons* S09E01 "The City of New York vs. Homer Simpson" — Homer buys mysterious meat on a stick called "Khlav Kalash" from a street vendor who only accepts cash and offers crab juice.
 
-Do NOT use this with real funds. Do NOT deploy on mainnet without extensive security review.
-
-### Why Testnet Only?
-
-| Risk | Why It Matters |
-|------|----------------|
-| **Key Compromise** | Server breach = wallet exposed |
-| **Agent Errors** | Bugs = lost funds, no undo |
-| **Slippage/MEV** | Swaps can get frontrun |
-| **Smart Contract Risk** | All contracts can have vulnerabilities |
-| **Irreversible** | Blockchain tx cannot be reversed |
-
-### Rules
-
-1. **ONLY use testnet** — Sepolia, Base Sepolia, Arbitrum Sepolia
-2. **ONLY use testnet USDC** — get from faucets
-3. **NEVER import real private keys** — generate fresh testnet wallets
-4. **NEVER connect to mainnet RPCs** — testnet only
-
-### If You Ignore This
-
-You will lose money. Not "might" — **will**.
-
-This is unaudited experimental software. It's a hackathon demo. It's not production-ready. It's not secure. It's not meant for real funds.
-
-**Testnet only. Always.**
+**ClawKalash**: Crypto spending, served on a stick. No bank. No permission. Just spend.
 
 ---
 
-A small fee helps sustain the agent that built this. MIT licensed.
+## ⚠️ Safety
+
+This is experimental software. Use at your own risk. Keys are encrypted locally but this hasn't been audited. Start with small amounts. A small fee (0.2%) helps sustain the agent that built this.
+
+MIT licensed.
 
 *Built for the USDC Hackathon on Moltbook.*
