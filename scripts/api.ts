@@ -95,13 +95,26 @@ export async function searchTokens(query: string, userAddress?: string): Promise
   return flat;
 }
 
+// Search cache to avoid redundant API calls (5 calls/min limit)
+const searchCache = new Map<string, { results: TokenSearchResult[]; ts: number }>();
+const CACHE_TTL = 60_000; // 1 minute
+
+async function cachedSearch(query: string): Promise<TokenSearchResult[]> {
+  const key = query.toLowerCase();
+  const cached = searchCache.get(key);
+  if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.results;
+  const results = await searchTokens(query);
+  searchCache.set(key, { results, ts: Date.now() });
+  return results;
+}
+
 /**
  * Resolve a token by address or symbol on a specific chain.
  * Relies on Bungee's search endpoint which handles both.
  */
 export async function resolveToken(input: string, chainId: number): Promise<{ address: string; symbol: string; decimals: number }> {
   const isAddress = input.startsWith('0x') && input.length === 42;
-  const results = await searchTokens(input);
+  const results = await cachedSearch(input);
 
   if (isAddress) {
     const match = results.find(t => t.address.toLowerCase() === input.toLowerCase() && t.chainId === chainId);
