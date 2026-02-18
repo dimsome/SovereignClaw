@@ -31,17 +31,17 @@ interface WalletData {
 
 export function encrypt(text: string, password: string): { encrypted: string; iv: string; salt: string } {
   const salt = crypto.randomBytes(16);
-  const key = crypto.scryptSync(password, new Uint8Array(salt), 32);
+  const key = crypto.scryptSync(password, salt, 32);
   const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv('aes-256-cbc', new Uint8Array(key), new Uint8Array(iv));
+  const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   return { encrypted, iv: iv.toString('hex'), salt: salt.toString('hex') };
 }
 
 export function decrypt(encrypted: string, iv: string, salt: string, password: string): string {
-  const key = crypto.scryptSync(password, new Uint8Array(Buffer.from(salt, 'hex')), 32);
-  const decipher = crypto.createDecipheriv('aes-256-cbc', new Uint8Array(key), new Uint8Array(Buffer.from(iv, 'hex')));
+  const key = crypto.scryptSync(password, Buffer.from(salt, 'hex'), 32);
+  const decipher = crypto.createDecipheriv('aes-256-cbc', key, Buffer.from(iv, 'hex'));
   let decrypted = decipher.update(encrypted, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;

@@ -54,7 +54,7 @@ async function readStdin(): Promise<string> {
     // Interactive: prompt
     process.stderr.write('Enter private key or mnemonic: ');
   }
-  const chunks: Uint8Array[] = [];
+  const chunks: Buffer[] = [];
   for await (const chunk of process.stdin) {
     chunks.push(chunk);
   }
@@ -111,8 +111,8 @@ async function handleWalletCreate() {
 async function handleWalletImport() {
   const keyOrMnemonic = await readStdin();
   if (!keyOrMnemonic) {
-    console.error('Usage: echo "my-key" | ck wallet-import');
-    console.error('   or: ck wallet-import  (interactive prompt)');
+    console.error('Usage: echo "my-key" | clawkalash wallet-import');
+    console.error('   or: clawkalash wallet-import  (interactive prompt)');
     process.exit(1);
   }
   const address = importWallet(keyOrMnemonic);
@@ -122,7 +122,7 @@ async function handleWalletImport() {
 async function handleWalletAddress() {
   const address = getWalletAddress();
   if (!address) {
-    console.error('No wallet found. Run: ck wallet-create');
+    console.error('No wallet found. Run: clawkalash wallet-create');
     process.exit(1);
   }
   console.log(address);
@@ -131,7 +131,7 @@ async function handleWalletAddress() {
 async function handlePortfolio(args: string[]) {
   const address = args[0] || getWalletAddress() || process.env.USER_ADDRESS;
   if (!address) {
-    console.error('Usage: ck portfolio [address]');
+    console.error('Usage: clawkalash portfolio [address]');
     process.exit(1);
   }
   const tokens = await getTokenBalances(address);
@@ -141,7 +141,7 @@ async function handlePortfolio(args: string[]) {
 async function handleSearch(args: string[]) {
   const query = args.join(' ');
   if (!query) {
-    console.error('Usage: ck search <query>');
+    console.error('Usage: clawkalash search <query>');
     process.exit(1);
   }
   const results = await searchTokens(query);
@@ -158,7 +158,7 @@ async function handleSearch(args: string[]) {
 async function handleQuote(args: string[]) {
   const [originChain, destChain, inputToken, outputToken, amount, userAddress] = args;
   if (!userAddress) {
-    console.error('Usage: ck quote <originChain> <destChain> <inputToken> <outputToken> <amount> <userAddress>');
+    console.error('Usage: clawkalash quote <originChain> <destChain> <inputToken> <outputToken> <amount> <userAddress>');
     process.exit(1);
   }
 
@@ -188,14 +188,14 @@ async function handleSwap(args: string[], flags: Record<string, string | boolean
 
   if (!privateKey) {
     console.error('No wallet found. Either:');
-    console.error('  1. Create wallet: ck wallet-create');
+    console.error('  1. Create wallet: clawkalash wallet-create');
     console.error('  2. Set PRIVATE_KEY env var');
     process.exit(1);
   }
 
   const [originChain, destChain, inputToken, outputToken, amount] = args;
   if (!amount) {
-    console.error('Usage: ck swap <originChain> <destChain> <inputToken> <outputToken> <amount> [--dry-run]');
+    console.error('Usage: clawkalash swap <originChain> <destChain> <inputToken> <outputToken> <amount> [--dry-run]');
     process.exit(1);
   }
 
@@ -213,7 +213,7 @@ async function handleSwap(args: string[], flags: Record<string, string | boolean
     account = mnemonicToAccount(privateKey);
   } else {
     const normalized = privateKey.startsWith('0x') ? privateKey as `0x${string}` : `0x${privateKey}`;
-    account = privateKeyToAccount(normalized as `0x${string}`);
+    account = privateKeyToAccount(normalized);
   }
 
   const parsedAmount = parseAmount(amount, resolvedInput.decimals);
@@ -240,7 +240,7 @@ async function handleSwap(args: string[], flags: Record<string, string | boolean
 async function handleStatus(args: string[]) {
   const requestHash = args[0];
   if (!requestHash) {
-    console.error('Usage: ck status <requestHash>');
+    console.error('Usage: clawkalash status <requestHash>');
     process.exit(1);
   }
 
@@ -276,12 +276,12 @@ Trading:
 Token inputs accept addresses (0x...) or symbols (ETH, USDC).
 
 Examples:
-  ck wallet-create
-  echo "0xprivatekey" | ck wallet-import
-  ck portfolio
-  ck search USDC
-  ck swap 8453 8453 ETH USDC 1000000000000000 --dry-run
-  ck status 0xa6b977...
+  clawkalash wallet-create
+  echo "0xprivatekey" | clawkalash wallet-import
+  clawkalash portfolio
+  clawkalash search USDC
+  clawkalash swap 8453 8453 ETH USDC 1000000000000000 --dry-run
+  clawkalash status 0xa6b977...
 
 Environment:
   WALLET_KEY   - Encryption key for stored wallet (REQUIRED)

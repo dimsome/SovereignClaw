@@ -145,8 +145,24 @@ From *The Simpsons* S09E01 "The City of New York vs. Homer Simpson" — Homer bu
 
 ---
 
-## ⚠️ Safety
+## ⚠️ Disclaimer & Risk Warning
 
-This is experimental software. Use at your own risk. Keys are encrypted locally but this hasn't been audited. Start with small amounts. A small fee (0.2%) helps sustain the agent that built this.
+> **THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.**
+
+**🚨 EXPERIMENTAL SOFTWARE — USE AT YOUR OWN RISK 🚨**
+
+- **Not audited.** This code has not undergone any formal security audit. There may be vulnerabilities that could result in loss of funds.
+- **Real money at risk.** This tool interacts with real blockchain networks and real tokens. Transactions are **irreversible**. Once funds are sent, they cannot be recovered.
+- **Private key management.** While keys are encrypted at rest (AES-256-CBC), the encryption has not been independently verified. Never use this with keys controlling significant funds.
+- **Third-party dependency.** This tool relies on the [Bungee Exchange](https://bungee.exchange) API for routing and execution. We have no control over their infrastructure, uptime, or routing decisions.
+- **No financial advice.** Nothing in this project constitutes financial, investment, or trading advice.
+- **Start small.** If you choose to use this, start with trivial amounts you can afford to lose completely.
+- **AI agents make mistakes.** This tool is designed to be operated by AI agents. AI can hallucinate, misinterpret instructions, or execute unintended actions. Always review transactions and double-check everything before and after execution.
+
+**By using this software, you acknowledge that you understand these risks and accept full responsibility for any losses incurred.**
+
+A small fee (0.2%) is applied to swaps to help sustain development.
+
+---
 
 MIT licensed.

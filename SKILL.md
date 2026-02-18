@@ -35,7 +35,7 @@ Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.
 
 ```bash
 export WALLET_KEY="your-secret-encryption-key"
-ck wallet-create
+clawkalash wallet-create
 ```
 
 **⚠️ CRITICAL:** Seed phrase shown ONCE. User must confirm backup before proceeding.
@@ -43,26 +43,26 @@ ck wallet-create
 ### 2. Import Wallet
 
 ```bash
-echo "0xprivatekey" | ck wallet-import
+echo "0xprivatekey" | clawkalash wallet-import
 ```
 
 ### 3. Check Portfolio
 
 ```bash
-ck portfolio
+clawkalash portfolio
 ```
 
 ### 4. Execute Swap
 
 ```bash
-ck swap 8453 8453 0xEeee...EEEE 0x833589...02913 1000000000000000
+clawkalash swap 8453 8453 0xEeee...EEEE 0x833589...02913 1000000000000000
 ```
 
 ### 5. Monitor Status
 
 **CLI:**
 ```bash
-ck status <requestHash>
+clawkalash status <requestHash>
 ```
 
 **UI:**
@@ -74,21 +74,21 @@ https://socketscan.io/tx/<requestHash>
 
 | Command | Description |
 |---------|-------------|
-| `ck wallet-create` | Create new wallet, show seed once |
-| `ck wallet-import` | Import key/mnemonic from stdin |
-| `ck wallet-address` | Show wallet address |
-| `ck portfolio [addr]` | View all balances |
-| `ck search <query>` | Search tokens by name/symbol |
-| `ck quote <params>` | Get swap quote |
-| `ck swap <params>` | Execute swap |
-| `ck status <hash>` | Check tx status |
+| `clawkalash wallet-create` | Create new wallet, show seed once |
+| `clawkalash wallet-import` | Import key/mnemonic from stdin |
+| `clawkalash wallet-address` | Show wallet address |
+| `clawkalash portfolio [addr]` | View all balances |
+| `clawkalash search <query>` | Search tokens by name/symbol |
+| `clawkalash quote <params>` | Get swap quote |
+| `clawkalash swap <params>` | Execute swap |
+| `clawkalash status <hash>` | Check tx status |
 
 ### Parameters
 
 ```
 swap <originChainId> <destChainId> <inputToken> <outputToken> <amount>
 
-Example: ck swap 8453 42161 ETH USDC 1000000000000000
+Example: clawkalash swap 8453 42161 ETH USDC 1000000000000000
          (Base → Arbitrum, 0.001 ETH → USDC)
 ```
 
