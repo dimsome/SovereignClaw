@@ -1,10 +1,12 @@
-# ClawKalash 🥩
+# ClawKalash 🥩 
 
-> **"No bank. No permission. Just Swap! Swap! Swap!"**
+> *Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.*
+
+**"No bank. No permission. Just Swap! Swap! Swap!"**
 
 [![Khlav Kalash](https://img.youtube.com/vi/2MS7CtbTKtg/0.jpg)](https://www.youtube.com/watch?v=2MS7CtbTKtg)
 
-*Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.*
+
 
 ```bash
 npm i -g clawkalash
