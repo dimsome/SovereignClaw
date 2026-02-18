@@ -16,7 +16,9 @@
   "scripts": {
     "build": "esbuild scripts/cli.ts scripts/wallet.ts --bundle --platform=node --outdir=dist --format=esm --external:viem",
     "prepublishOnly": "npm run build",
-    "test": "vitest run",
+    "test": "vitest run --exclude tests/api-integration.test.ts",
+    "test:api": "vitest run tests/api-integration.test.ts",
+    "test:all": "vitest run",
     "portfolio": "tsx scripts/cli.ts portfolio",
     "quote": "tsx scripts/cli.ts quote",
     "swap": "tsx scripts/cli.ts swap",

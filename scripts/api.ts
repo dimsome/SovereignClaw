@@ -49,16 +49,31 @@ export async function getTokenBalances(userAddress: string): Promise<TokenBalanc
 
 // ============ Token Search ============
 
-export async function searchTokens(query: string): Promise<TokenSearchResult[]> {
-  const url = `${BUNGEE_API}/api/v1/tokens/search?query=${encodeURIComponent(query)}`;
+export async function searchTokens(query: string, userAddress?: string): Promise<TokenSearchResult[]> {
+  let url = `${BUNGEE_API}/api/v1/tokens/search?q=${encodeURIComponent(query)}`;
+  if (userAddress) url += `&address=${userAddress}`;
   const response = await fetch(url);
-  const data = await response.json() as { success?: boolean; result?: TokenSearchResult[] };
+  const data = await response.json() as { success?: boolean; result?: any };
 
   if (!data.success || !data.result) {
     throw new Error('Failed to search tokens');
   }
 
-  return data.result;
+  // API returns { tokens: { [chainId]: TokenSearchResult[] } }
+  const tokens = data.result.tokens || data.result;
+  if (Array.isArray(tokens)) return tokens;
+
+  const flat: TokenSearchResult[] = [];
+  for (const chainTokens of Object.values(tokens)) {
+    if (Array.isArray(chainTokens)) flat.push(...chainTokens);
+  }
+  // Prefer verified/shortlisted tokens for better symbol matching
+  flat.sort((a, b) => {
+    const aScore = (a.isShortListed ? 2 : 0) + (a.isVerified ? 1 : 0);
+    const bScore = (b.isShortListed ? 2 : 0) + (b.isVerified ? 1 : 0);
+    return bScore - aScore;
+  });
+  return flat;
 }
 
 /**
@@ -66,14 +81,29 @@ export async function searchTokens(query: string): Promise<TokenSearchResult[]> 
  * Relies on Bungee's search endpoint which handles both.
  */
 export async function resolveToken(input: string, chainId: number): Promise<{ address: string; symbol: string; decimals: number }> {
+  const isAddress = input.startsWith('0x') && input.length === 42;
   const results = await searchTokens(input);
-  const match = results.find(t => t.chainId === chainId);
 
-  if (!match) {
-    throw new Error(`Token "${input}" not found on chain ${chainId}`);
+  if (isAddress) {
+    const match = results.find(t => t.address.toLowerCase() === input.toLowerCase() && t.chainId === chainId);
+    if (match) return { address: match.address, symbol: match.symbol, decimals: match.decimals };
+    const anyMatch = results.find(t => t.address.toLowerCase() === input.toLowerCase());
+    if (anyMatch) return { address: input, symbol: anyMatch.symbol, decimals: anyMatch.decimals };
+    console.warn(`Warning: could not fetch metadata for ${input}, assuming 18 decimals`);
+    return { address: input, symbol: input.slice(0, 8), decimals: 18 };
   }
 
-  return { address: match.address, symbol: match.symbol, decimals: match.decimals };
+  // Exact symbol match on target chain
+  const exactOnChain = results.find(
+    t => t.symbol.toLowerCase() === input.toLowerCase() && t.chainId === chainId
+  );
+  if (exactOnChain) return { address: exactOnChain.address, symbol: exactOnChain.symbol, decimals: exactOnChain.decimals };
+
+  // Any match on target chain
+  const onChain = results.find(t => t.chainId === chainId);
+  if (onChain) return { address: onChain.address, symbol: onChain.symbol, decimals: onChain.decimals };
+
+  throw new Error(`Token "${input}" not found on chain ${chainId}`);
 }
 
 // ============ Quote ============
