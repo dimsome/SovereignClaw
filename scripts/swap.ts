@@ -272,10 +272,14 @@ async function handleApproval(
 async function pollStatus(
   requestHash: string,
   log: LogFn,
-  maxAttempts = 60
+  maxAttempts = 20
 ): Promise<unknown> {
   const socketScanUrl = `https://socketscan.io/tx/${requestHash}`;
+  // Start at 15s, increase to 30s after a few attempts (respect 5 calls/min limit)
   for (let i = 0; i < maxAttempts; i++) {
+    const delay = i < 4 ? 15_000 : 30_000;
+    await new Promise(r => setTimeout(r, delay));
+
     const results = await getStatus(requestHash);
     const status = results[0];
     const code = status?.bungeeStatusCode;
@@ -288,11 +292,9 @@ async function pollStatus(
     if (code === 6) throw new Error('Request cancelled');
     if (code === 7) throw new Error('Request refunded');
 
-    if (i % 3 === 0 && i > 0) {
-      log(`   Still waiting... (${i * 5}s) — ${socketScanUrl}`);
-    }
-    await new Promise(r => setTimeout(r, 5000));
+    const elapsed = i < 4 ? (i + 1) * 15 : 60 + (i - 3) * 30;
+    log(`   Still waiting... (${elapsed}s) — ${socketScanUrl}`);
   }
 
-  throw new Error(`Polling timed out after ${maxAttempts * 5}s. Track manually: ${socketScanUrl}`);
+  throw new Error(`Polling timed out. Track manually: ${socketScanUrl}`);
 }
