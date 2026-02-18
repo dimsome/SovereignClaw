@@ -234,7 +234,8 @@ async function handleSwap(args: string[], flags: Record<string, string | boolean
 
   console.log('Executing swap...');
   const result = await executeSwap(privateKey, quote);
-  console.log('Done!', result);
+  console.log(`\n✅ Swap complete!`);
+  console.log(`   🔗 https://socketscan.io/tx/${result.requestHash}`);
 }
 
 async function handleStatus(args: string[]) {
