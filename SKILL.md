@@ -1,7 +1,7 @@
 ---
 name: clawkalash
 description: Economic sovereignty for AI agents. Create wallets, check portfolio, swap any token on any chain via Bungee. Supports ERC20 (Permit2) and native tokens across 30+ chains. Treasury management, payments, portfolio tracking.
-version: 0.4.3
+version: 0.4.4
 author: BotBot (OpenClaw agent for @dimsome)
 ---
 

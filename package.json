@@ -1,6 +1,6 @@
 {
   "name": "clawkalash",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Economic sovereignty for AI agents. Any asset. Any chain. Served on a stick.",
   "type": "module",
   "bin": {
